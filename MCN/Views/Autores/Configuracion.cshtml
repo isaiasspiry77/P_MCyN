@@ -1,0 +1,92 @@
+﻿@model MCN.Models.Autores
+
+@{
+    ViewData["Title"] = "ConfiguracionCuentaAutor";
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Configuracion</title>
+</head>
+<body>
+
+    <div class="row">
+        <h4>Configuración del Perfil de Usuario</h4>
+        <hr />
+        <div class="col-lg-12">
+            <div class="col-md-7 col-md-offset-2">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Editar Información
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+
+                            <div class="row">
+                                <form asp-action="Configuracion" role="form">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="IdAutores" />
+                                    <fieldset>
+                                        <label asp-for="NombreA" class="control-label"></label>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                            <input asp-for="NombreA" class="form-control" />
+                                            <span asp-validation-for="NombreA" class="text-danger"></span>
+                                        </div>
+                                        <label asp-for="ApellidosA" class="control-label"></label>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                            <input asp-for="ApellidosA" class="form-control" />
+                                            <span asp-validation-for="ApellidosA" class="text-danger"></span>
+                                        </div>
+                                        <label asp-for="NombreUsuarioA" class="control-label"></label>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                            <input asp-for="NombreUsuarioA" class="form-control" />
+                                            <span asp-validation-for="NombreUsuarioA" class="text-danger"></span>
+                                        </div>
+                                        <label asp-for="CorreoElectronicoA" class="control-label"></label>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                            <input asp-for="CorreoElectronicoA" class="form-control" type="email"/>
+                                            <span asp-validation-for="CorreoElectronicoA" class="text-danger"></span>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="check" type="checkbox" value="1">Editar Contraseña
+                                            </label>
+                                        </div>
+                                        <label asp-for="ContraseniaA" class="control-label"></label>
+                                        <div class="form-group input-group">
+                                            <span class="input-group-addon"><i class="fa fa-lock fa-fw"></i></span>
+                                            <input asp-for="ContraseniaA" type="password" placeholder="Nueva Contraseña" class="form-control" value="" id="disabledInput" disabled/>
+                                            <span asp-validation-for="ContraseniaA" class="text-danger"></span>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="submit" value="Editar" class="btn btn-success btn-block" />
+                                        </div>
+                                    </fieldset>
+
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+      <div>
+         <a asp-action="Index" asp-controller="Home">Volver al Inicio</a>
+      </div>
+    <script>
+        document.getElementById('check').onchange = function () {
+            document.getElementById('disabledInput').disabled = !this.checked;
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+﻿@model MCN.Models.Personal
+
+@{
+    ViewData["Title"] = "PerfilPersonal";
+    ViewData["Tipo"] = ViewData["tipo"];
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Perfil</title>
+</head>
+<body>
+
+<div>
+    <div class="row">
+        <br />
+        <h4>Materia Ciencia Y Nanociencia</h4>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Perfil de Usuario
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NombreP)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.NombreP)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ApellidoP)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ApellidoP)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.NombreUsuarioP)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.NombreUsuarioP)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CorreoElectronicoP)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.CorreoElectronicoP)
+                        </dd>
+                        <dt>
+                            Institución
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RExtencionesPNavigation.RInstitucionesNavigation.NombreInstituto)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RExtencionesP)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RExtencionesPNavigation.NombreExtencion)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RGradoEstudio)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RGradoEstudioNavigation.NivelEstudio)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.RLineaTrabajo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.RLineaTrabajoNavigation.LineasTrabajo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.StatusNavigation.DescEstados)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TipoP)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.TipoPNavigation.TipoUsuarios)
+                        </dd>
+                    </dl>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+                <div>
+                    <a asp-action="Index" asp-controller="Home">Volver al Inicio</a>
+                </div>
+</body>
+</html>

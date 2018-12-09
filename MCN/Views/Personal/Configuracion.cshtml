@@ -1,0 +1,121 @@
+﻿@model MCN.Models.Personal
+
+@{
+    ViewData["Title"] = "ConfiguracionPersonal";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Configuracion</title>
+</head>
+<body>
+
+    <div class="row">
+        <h4>Configuración del Perfil de Usuario</h4>
+        <hr />
+        <div class="col-lg-12">
+            <div class="col-md-9 col-md-offset-1">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        Editar Información
+                    </div>
+                    <div class="panel-body">
+                        <div class="col-lg-12">
+
+                            <div class="row">
+                                <form asp-action="Configuracion" role="form">
+                                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                    <input type="hidden" asp-for="IdPersonal" />
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <label asp-for="NombreP" class="control-label"></label>
+                                            <input asp-for="NombreP" class="form-control" />
+                                            <span asp-validation-for="NombreP" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="ApellidoP" class="control-label"></label>
+                                            <input asp-for="ApellidoP" class="form-control" />
+                                            <span asp-validation-for="ApellidoP" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="NombreUsuarioP" class="control-label"></label>
+                                            <input asp-for="NombreUsuarioP" class="form-control" />
+                                            <span asp-validation-for="NombreUsuarioP" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="CorreoElectronicoP" class="control-label"></label>
+                                            <input asp-for="CorreoElectronicoP" class="form-control" />
+                                            <span asp-validation-for="CorreoElectronicoP" class="text-danger"></span>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input id="check" type="checkbox" value="1">Editar Contraseña
+                                            </label>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="Contrasenia" class="control-label"></label>
+                                            <input asp-for="Contrasenia" class="form-control" type="password" placeholder="Nueva Contraseña" value="" id="disabledInput" disabled/>
+                                            <span asp-validation-for="Contrasenia" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <!--div class="form-group">
+                                            <label asp-for="TipoP" class="control-label"></label>
+                                            <select asp-for="TipoP" class="form-control" asp-items="ViewBag.TipoP"></select>
+                                            <span asp-validation-for="TipoP" class="text-danger"></span>
+                                        </div-->
+
+                                        <div class="form-group">
+                                            <!--span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span-->
+                                            <label class="control-label">Institución</label>
+                                            <select class="form-control" asp-items="ViewBag.IdInstituciones " id="instit"></select>
+                                            <!--span class="input-group-addon "><a href="#" id="agregar_insti"><i class="fa fa-plus fa-fw"></i></a></!--span-->
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="RExtencionesP" class="control-label"></label>
+                                            <select asp-for="RExtencionesP" class="form-control" asp-items="ViewBag.IdExtenciones" id="depen"></select>
+                                            <span asp-validation-for="RExtencionesP" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="RGradoEstudio" class="control-label"></label>
+                                            <select asp-for="RGradoEstudio" class="form-control" asp-items="ViewBag.IdGradoEst"></select>
+                                            <span asp-validation-for="RGradoEstudio" class="text-danger"></span>
+                                        </div>
+                                        <div class="form-group">
+                                            <label asp-for="RLineaTrabajo" class="control-label"></label>
+                                            <select asp-for="RLineaTrabajo" class="form-control" asp-items="ViewBag.IdLineaTrabajp"></select>
+                                            <span asp-validation-for="RLineaTrabajo" class="text-danger"></span>
+                                        </div>
+                                        <!--div class="form-group">
+                                            <label asp-for="Status" class="control-label"></label>
+                                            <select asp-for="Status" class="form-control" asp-items="ViewBag.Status"></select>
+                                            <span asp-validation-for="Status" class="text-danger"></span>
+                                        </div-->
+                                        <br />
+                                        <br />
+                                        <div class="form-group">
+                                            <input type="submit" value="Editar" class="btn btn-success btn-block"/>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a asp-action="Index" asp-controller="Home">Volver al Inicio</a>
+    </div>
+    <script>
+        document.getElementById('check').onchange = function () {
+            document.getElementById('disabledInput').disabled = !this.checked;
+        };
+    </script>
+</body>
+</html>

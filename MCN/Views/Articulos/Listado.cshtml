@@ -1,0 +1,129 @@
+﻿@model IEnumerable<MCN.Models.Articulo>
+
+@{
+    ViewData["Title"] = "ListadoArticulos";
+    ViewData["Tipo"] = ViewData["tipo"];
+
+    int i = 0;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Listado</title>
+</head>
+<body>
+    <div class="row">
+        <h4>Articulos Publicados</h4>
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Listado de Articulos Publicados
+                </div>
+                <div class="panel-body">
+                    <table width="100%" class="table table-striped table-bordered table-hover" id="dataTables-example">
+                        <thead>
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.TituloArticulo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaPublicacionA)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RutaDocumentoA)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RutaZipImagenesA)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ComentariosAutor)
+                                </th>
+                                @if (i != 0)
+                                {
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.FechaEdicionA)
+                                    </th>
+                                }
+                                <th>
+                                    @Html.DisplayNameFor(model => model.RAutor)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Status)
+                                </th>
+                                <th>Acción</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TituloArticulo)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaPublicacionA)
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Articulos", "DownloadPdf", new { fullPath = (string)item.RutaDocumentoA }, new { @class = "btn btn-success btn-block fa fa-download " })
+                                    </td>
+                                    <td>
+                                        @Html.ActionLink("Articulos", "DownloadZip", new { fullPath = (string)item.RutaZipImagenesA }, new { @class = "btn btn-success btn-block fa fa-download " })
+                                    </td>
+                                    <td >
+                                        <p align="justify">@Html.DisplayFor(modelItem => item.ComentariosAutor)</p> 
+                                    </td>
+                                    @if (item.FechaEdicionA != null)
+                                    {
+                                        i = 1;
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.FechaEdicionA)
+                                        </td>
+                                    }
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.RAutorNavigation.NombreA)
+                                        @Html.DisplayFor(modelItem => item.RAutorNavigation.ApellidosA)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
+                                    </td>
+                                    <td>
+                                        <!--a asp-action="Retroalimentacion" asp-controller="Articulos" asp-route-id="@item.IdArticulo">Retroalimentar</a-->
+                                        <!--a href="#" id="retroalimentacion" onclick="alerta(this.id)" name="">Retroalimentación</a--> 
+                                        <a asp-action="Asignacion" asp-route-id="@item.IdArticulo">Asignar Revisor</a> |
+                                        <a asp-action="DetalleArticulo" asp-route-id="@item.IdArticulo">Detalles del Articulo</a> |
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+            function alerta(id) {
+                //alert(id);
+                var valor = document.getElementById('Retroalimentar').val();
+
+                console.log();
+                /*swal({
+                    title: 'Retroalimentar',
+                    html:
+                        '<br>' +
+                        '<br>' +
+                        '<form id="form_line"> ' +
+                        '<label  class="control-label" ><font size=4>Nombre de la Linea de Trabajo:</font></label>' +
+                        '<input type="text" id="nombre_line"  class="form-control" required></input>' +
+                        '</form>',
+                    confirmButtonText: 'Agregar',
+                    showLoaderOnConfirm: true,
+                    showCancelButton: true,
+                    closeOnConfirm: false*/
+                });
+            }
+    </script>
+</body>
+</html>

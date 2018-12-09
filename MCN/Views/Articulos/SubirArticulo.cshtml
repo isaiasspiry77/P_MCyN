@@ -1,0 +1,75 @@
+﻿@model MCN.Models.Articulo
+
+@{
+    ViewData["Title"] = "SubirArticulos";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>SubirArticulo</title>
+</head>
+<body>
+    <div class="row">
+        <h4>Subir Articulo</h4>
+        <hr />
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Formulario de Publicación
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <form asp-action="SubirArticulo" asp-controller="Articulos" method="post" role="form" enctype="multipart/form-data">
+                            <div class="col-lg-6">
+                                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                                <div class="form-group">
+                                    <label asp-for="TituloArticulo" class="control-label" id="titulo"></label>
+                                    <!--input asp-for="TituloArticulo" class="form-control" /-->
+                                    <input type="text" class="form-control" name="titulo" />
+                                    <!--span asp-validation-for="TituloArticulo" class="text-danger"></span-->
+                                </div>
+                                <div class="form-group">
+                                    <a class="btn btn-block btn-social btn-bitbucket" id="colaborador">
+                                        <i class="fa fa-group"></i> Agregar un Nuevo Colaborador
+                                    </a>
+                                </div>
+                                <div class="form-group" id="checksCoautores">
+
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="RutaDocumentoA" class="control-label"></label>
+                                    <!--input asp-for="RutaDocumentoA" class="form-control" type="file" /-->
+                                    <input type="file" class="form-control" name="urlPdf" />
+                                    <!--span asp-validation-for="RutaDocumentoA" class="text-danger"></span-->
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="RutaZipImagenesA" class="control-label"></label>
+                                    <!--input asp-for="RutaZipImagenesA" class="form-control" type="file" /-->
+                                    <input type="file" class="form-control" name="urlImg" />
+                                    <!--span asp-validation-for="RutaZipImagenesA" class="text-danger"></span-->
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label asp-for="ComentariosAutor" class="control-label"></label>
+                                    <!--textarea asp-for="ComentariosAutor" class="form-control" rows="5"></textarea-->
+                                    <textarea class="form-control" rows="5" name="coment"></textarea>
+                                    <!--span asp-validation-for="ComentariosAutor" class="text-danger"></span-->
+                                </div>
+
+                                <div class="form-group">
+                                    <input type="submit" value="Publicar" class="btn btn-primary btn-lg btn-block  btn-success" id="BotonSubirArchivo" />
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

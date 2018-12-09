@@ -1,0 +1,100 @@
+public int IdPersonal { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Nombre")]
+        [StringLength(30)]
+        public string NombreP { get; set; }
+        [Required (ErrorMessage ="Campo Requerido!")]
+        [Display(Name = "Apellidos")]
+        [StringLength(60)]
+        public string ApellidoP { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Nombre de Usuario")]
+        [StringLength(20)]
+        public string NombreUsuarioP { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Correo Electrónico")]
+        [StringLength(30)]
+        public string CorreoElectronicoP { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Contraseña")]
+        [StringLength(25)]
+        public string Contrasenia { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Tipo de Usuario")]
+        public int TipoP { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Dependencia")]
+        public int? RExtencionesP { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Nivel Academico")]
+        public int? RGradoEstudio { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Linea de Trabajo")]
+        public int? RLineaTrabajo { get; set; }
+        [Display(Name = "Estado")]
+        public int Status { get; set; }
+
+private string connectionString;
+
+        public proyecto_r_mcynContext(string _ConnectionString)
+        {
+            this.connectionString = _ConnectionString;
+        }
+
+Scaffold-DbContext -force "Server=localhost;Database=proyecto_r_mcyn;User=root;Password=1234;" "Pomelo.EntityFrameworkCore.MySql" -Outputdir Models
+Scaffold-DbContext -force "Server=localhost;Database=proyecto_r_mcyn;User=root;Password=1234;" "Pomelo.EntityFrameworkCore.MySql" -Outputdir Models
+
+
+public int IdArticulo { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name ="Titulo del Articulo")]
+        [StringLength(50)]
+        public string TituloArticulo { get; set; }
+        [Display(Name ="Autor")]
+        public int RAutor { get; set; }
+        [Display(Name =("Fecha de Publicación"))]
+        [DataType(DataType.Date)]
+        public DateTime? FechaPublicacionA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Documento")]
+        [StringLength(200)]
+        public string RutaDocumentoA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Imagenes")]
+        [StringLength(200)]
+        public string RutaZipImagenesA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Comentarios del Autor")]
+        [StringLength(250)]
+        public string ComentariosAutor { get; set; }
+        [Display(Name = "Fecha de Edición")]
+        [DataType(DataType.Date)]
+        public DateTime? FechaEdicionA { get; set; }
+        [Display(Name = "Estado")]
+        public int Status { get; set; }
+
+
+public int IdAutores { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Nombre")]
+        [StringLength(30)]
+        public string NombreA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Apellidos")]
+        [StringLength(60)]
+        public string ApellidosA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Nombre de Usuario")]
+        [StringLength(20)]
+        public string NombreUsuarioA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Correo Electrónico")]
+        [StringLength(30)]
+        public string CorreoElectronicoA { get; set; }
+        [Required(ErrorMessage = "Campo Requerido!")]
+        [Display(Name = "Contraseña")]
+        [StringLength(25)]
+        public string ContraseniaA { get; set; }
+        public int TipoA { get; set; }
+        [Display(Name = "Estado")]
+        public int Status { get; set; }

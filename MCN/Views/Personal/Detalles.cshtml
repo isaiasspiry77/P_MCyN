@@ -1,0 +1,86 @@
+﻿@model MCN.Models.Personal
+
+@{
+    ViewData["Title"] = "DetallePersonal";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Detalles</title>
+</head>
+<body>
+
+<div>
+    <h4>Personal</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ApellidoP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ApellidoP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NombreUsuarioP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NombreUsuarioP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CorreoElectronicoP)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CorreoElectronicoP)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Contrasenia)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Contrasenia)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RExtencionesPNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RExtencionesPNavigation.IdExtenciones)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RGradoEstudioNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RGradoEstudioNavigation.IdGradoEst)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RLineaTrabajoNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RLineaTrabajoNavigation.IdLineaTrabajp)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.StatusNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusNavigation.Lestados)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.TipoPNavigation)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TipoPNavigation.TipoUsuarios)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Listado">Regresar al Listado</a>
+</div>
+</body>
+</html>

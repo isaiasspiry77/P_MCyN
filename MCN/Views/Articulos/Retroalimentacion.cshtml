@@ -1,0 +1,112 @@
+﻿@model MCN.Models.DetalleArticulos
+
+@{
+    ViewData["Title"] = "RetroalimentarArticulos";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Retroalimentacion</title>
+</head>
+<body>
+
+
+    <div class="row">
+        <h4>DetalleArticulos</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.IdArticuloNavigation.TituloArticulo)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdArticuloNavigation.TituloArticulo)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IdArticuloNavigation.RAutor)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdArticuloNavigation.RAutorNavigation.NombreA)
+                @Html.DisplayFor(model => model.IdArticuloNavigation.RAutorNavigation.ApellidosA)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+            </dt>
+            <dd>
+                @Html.DisplayFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IdArticuloNavigation.ComentariosAutor)
+            </dt>
+            <dd>
+                <p align="justify">@Html.DisplayFor(model => model.IdArticuloNavigation.ComentariosAutor)</p>
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.IdPersonal)
+            </dt>
+            @if (Html.DisplayFor(model => model.IdPersonal) != null)
+            {
+                <dd>
+                    Revisor no Asignado
+                </dd>
+            }
+            else
+            {
+                <dd>
+                    @Html.DisplayFor(model => model.IdPersonal)
+                </dd>
+            }
+        </dl>
+
+        <div class="col-md-4">
+            <form asp-action="Retroalimentacion">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdDetalleArt" />
+                <!--div class="form-group">
+        <label asp-for="IdPersonal" class="control-label"></label>
+        <select asp-for="IdPersonal" class="form-control" asp-items="ViewBag.IdPersonal"></select>
+        <span asp-validation-for="IdPersonal" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="FechaRevision" class="control-label"></label>
+        <input asp-for="FechaRevision" class="form-control" />
+        <span asp-validation-for="FechaRevision" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ComentariosRetroaliment" class="control-label"></label>
+        <input asp-for="ComentariosRetroaliment" class="form-control" />
+        <span asp-validation-for="ComentariosRetroaliment" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="IdArticulo" class="control-label"></label>
+        <select asp-for="IdArticulo" class="form-control" asp-items="ViewBag.IdArticulo"></select>
+        <span asp-validation-for="IdArticulo" class="text-danger"></span>
+    </div-->
+                <div class="form-group">
+                    <label asp-for="Status" class="control-label"></label>
+                    <select asp-for="Status" class="form-control" asp-items="ViewBag.Estados" id="esta"></select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">Comentario Editor</label>
+                    <textarea class="form-control" rows="5" id="textareaedi"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" id="botonretro" value="Asignar Revisor" name="btnretro" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+        
+
+    </div>
+
+<div>
+    <a asp-action="Listado">Volver al Listado</a>
+</div>
+
+</body>
+</html>
