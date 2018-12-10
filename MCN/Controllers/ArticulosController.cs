@@ -60,6 +60,29 @@ namespace MCN.Controllers
             return View(list);
         }
 
+        public ActionResult ListadoRevisores()
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int id = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var list = context.DetalleArticulos.Where(da => da.IdPersonal == id);
+
+            foreach (DetalleArticulos d in list)
+            {
+                d.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == d.IdArticulo).First();
+                d.IdPersonalNavigation = context.Personal.Where(p => p.IdPersonal == id).First();
+            }
+
+            ViewData["id"] = id;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(list);
+        }
+
         [HttpGet]
         public ActionResult SubirArticulo()
         {
