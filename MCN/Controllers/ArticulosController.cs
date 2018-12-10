@@ -185,11 +185,11 @@ namespace MCN.Controllers
             int idper = (int)HttpContext.Session.GetInt32("id");
 
             var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
-            Articulo articulo = context.Articulo.Where(ar => ar.IdArticulo == id && ar.Status != 2).First();
+            Articulo articulo = context.Articulo.Where(ar => ar.IdArticulo == id).First();
 
             if (articulo == null) RedirectToAction(nameof(Listado));
 
-            articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor && au.Status != 2).First();
+            articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor ).First();
             ViewBag.Estados = context.Estados.Where(es => es.IdEstado != 9 && es.IdEstado>6).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
 
             ViewData["id"] = idper;
@@ -202,7 +202,6 @@ namespace MCN.Controllers
 
         // POST: Articulos/Edit/5
         [HttpPost]
-        [Authorize]
         [ValidateAntiForgeryToken]
         public ActionResult Asignacion(int id, Articulo articulo , string textcoment)
         {
@@ -227,32 +226,23 @@ namespace MCN.Controllers
                     return RedirectToAction(nameof(Listado));
                 }
 
-                arti.Status = articulo.Status;
+                arti.Status = 7;
                 context.Update(arti);
                 context.SaveChanges();
                 if(textcoment!= null)
                 {
                     HttpContext.Session.SetString("coment", textcoment);
                 }
-                HttpContext.Session.SetInt32("idArti", id);
+                if(id!=0)
+                {
+                    HttpContext.Session.SetInt32("idArti", id);
+                }
+                
                 return RedirectToAction(nameof(RevisoresDisponibles));
             }
             catch
             {
-                var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
-                Articulo arti= context.Articulo.Where(ar => ar.IdArticulo == id && ar.Status != 2).First();
-
-                if (articulo == null) RedirectToAction(nameof(Listado));
-
-                arti.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor && au.Status != 2).First();
-                ViewBag.Estados = context.Estados.Where(es => es.IdEstado != 9 && es.IdEstado > 6).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
-
-
-                ViewData["id"] = idper;
-                ViewData["correo"] = correo;
-                ViewData["tipo"] = tipo;
-                
-                return View(arti);
+                return RedirectToAction(nameof(Asignacion));
             }
         }
 
@@ -279,8 +269,12 @@ namespace MCN.Controllers
             ViewData["id"] = idper;
             ViewData["correo"] = correo;
             ViewData["tipo"] = tipo;
-            ViewData["idArt"] = (int)HttpContext.Session.GetInt32("idArti");
-            HttpContext.Session.Remove("idArti");
+
+            if(HttpContext.Session.GetInt32("idArti")!=0 || HttpContext.Session.GetInt32("idArti") != null){
+                ViewData["idArt"] = (int)HttpContext.Session.GetInt32("idArti");
+                HttpContext.Session.Remove("idArti");
+            }
+            
             if (HttpContext.Session.GetString("coment") != null)
             {
                 ViewData["coment"] = HttpContext.Session.GetString("coment");
@@ -307,14 +301,49 @@ namespace MCN.Controllers
                 context.DetalleArticulos.Add(detalle);
                 context.SaveChanges();
 
-                HttpContext.Session.SetString("comentariomemo", comentariomemo);
+                if (comentariomemo != null)
+                {
+                    HttpContext.Session.SetString("comentariomemo", comentariomemo);
+                }
 
                 return RedirectToAction(nameof(Listado));
             }
             catch
             {
-                return View();
+                HttpContext.Session.SetInt32("idArti", id_articulo);
+                HttpContext.Session.SetString("coment", comentariomemo);
+
+                return RedirectToAction(nameof(RevisoresDisponibles));
             }
         }
+
+        public ActionResult DetalleArticulo(int id)
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int idper = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var Listdetalle = context.DetalleArticulos.Where(d => d.IdArticulo == id);
+
+            if (Listdetalle == null)
+            {
+                return RedirectToAction("Asignacion","Articulos", new {id_art = id });
+            }
+
+            foreach (DetalleArticulos d in Listdetalle)
+            {
+                d.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == d.IdArticulo).First();
+                d.IdPersonalNavigation = context.Personal.Where(per => per.IdPersonal == d.IdPersonal).First();
+            }
+
+            ViewData["id"] = idper;
+            ViewData["correo"] = correo;  
+            ViewData["tipo"] = tipo;
+
+            return View(Listdetalle);
+        }
+
     }
 }
