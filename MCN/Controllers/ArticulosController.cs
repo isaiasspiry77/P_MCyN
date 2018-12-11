@@ -38,6 +38,29 @@ namespace MCN.Controllers
             return View(list);
         }
 
+        public ActionResult ListadoAceptados()
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int id = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var list = context.Articulo.Where(ar => ar.Status ==9);
+
+            foreach (Articulo a in list)
+            {
+                a.RAutorNavigation = context.Autores.Where(au => au.IdAutores == a.RAutor).First();
+                a.StatusNavigation = context.Estados.Where(es => es.IdEstado == a.Status).First();
+            }
+
+            ViewData["id"] = id;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(list);
+        }
+
         public ActionResult ListadoAutor()
         {
             string correo = HttpContext.Session.GetString("Correo");

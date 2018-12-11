@@ -13,56 +13,76 @@
     <title>DetalleArticulo</title>
 </head>
 <body>
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FechaRevision)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ComentariosRetroaliment)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdArticuloNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdPersonalNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.StatusNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FechaRevision)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ComentariosRetroaliment)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdArticuloNavigation.ComentariosAutor)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdPersonalNavigation.ApellidoP)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.StatusNavigation.Lestados)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdDetalleArt">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdDetalleArt">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdDetalleArt">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdArticuloNavigation.TituloArticulo)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FechaRevision)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ComentariosRetroaliment)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IdPersonal)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Status)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdArticuloNavigation.TituloArticulo)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdArticuloNavigation.FechaPublicacionA)
+                </td>
+                @if (item.FechaRevision != null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FechaRevision)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        En espera de Revisión
+                    </td>
+                }
+                @if (item.ComentariosRetroaliment != null)
+                {
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ComentariosRetroaliment)
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        En espera de Revisión
+                    </td>
+                }
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdPersonalNavigation.NombreP)
+                    @Html.DisplayFor(modelItem => item.IdPersonalNavigation.ApellidoP)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+    <p>
+        <a asp-action="Listado" asp-controller="Articulos">Volver al Listado</a>
+    </p>
 </body>
 </html>

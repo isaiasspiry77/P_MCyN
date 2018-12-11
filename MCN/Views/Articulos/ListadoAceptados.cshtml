@@ -1,0 +1,86 @@
+﻿@model IEnumerable<MCN.Models.Articulo>
+
+@{
+    ViewData["Title"] = "ListadoArticulos";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ListadoAceptados</title>
+</head>
+<body>
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.TituloArticulo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaPublicacionA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RutaDocumentoA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RutaZipImagenesA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ComentariosAutor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaEdicionA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RAutorNavigation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.StatusNavigation)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.TituloArticulo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaPublicacionA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RutaDocumentoA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RutaZipImagenesA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ComentariosAutor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FechaEdicionA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RAutorNavigation.ApellidosA)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusNavigation.Lestados)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdArticulo">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdArticulo">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdArticulo">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+</body>
+</html>
