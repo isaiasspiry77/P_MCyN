@@ -38,6 +38,16 @@ namespace MCN.Controllers
             }
             else
             {
+
+                if (tipo == 3)
+                {
+                    if (HttpContext.Session.GetString("comentariomemo") != null)
+                    {
+                        ViewData["notificacion"] = HttpContext.Session.GetString("comentariomemo");
+                    }
+
+                }
+
                 ViewData["id"] = id;
                 ViewData["correo"] = correo;
                 ViewData["tipo"] = tipo;

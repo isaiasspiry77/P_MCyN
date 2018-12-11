@@ -76,6 +76,7 @@ namespace MCN.Controllers
                         HttpContext.Session.SetInt32("tipo", personal.TipoP);
                         HttpContext.Session.SetInt32("id", personal.IdPersonal);
 
+
                         return RedirectToAction("Index", "Home");
                     }
                     return RedirectToAction("Login", "Account");

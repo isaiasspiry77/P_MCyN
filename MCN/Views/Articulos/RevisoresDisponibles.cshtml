@@ -4,7 +4,7 @@
     ViewData["Title"] = "AsignarArticuloRevisores";
     ViewData["Tipo"] = ViewData["tipo"];
     int id_arti = (int)ViewData["idArt"];
-    string comentario =(string) ViewData["coment"];
+    string comentario = (string)ViewData["coment"];
 }
 
 <!DOCTYPE html>
@@ -14,8 +14,8 @@
     <title>RevisoresDisponibles</title>
 </head>
 <body>
-    <input type="hidden" id="id_ar" value="id_arti" />
-    <input type="hidden" id="come" value="comentario" />
+    <input type="hidden" id="id_ar" value="@id_arti" />
+    <input type="hidden" id="come" value="@comentario" />
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
@@ -79,8 +79,6 @@
                                     </td>
 
                                     <td>
-                                        <!--a asp-action="Edit" asp-route-id="@item.IdPersonal">Edit</a-->
-                                        <!--a asp-action="Details" asp-route-id="@item.IdPersonal">Details<a/-->
                                         <input type="hidden" value="@item.IdPersonal" id=">@item.IdPersonal" />
                                         <a href="#" id="@item.IdPersonal" onclick="ObtenId(this)">Asignar Articulo</a>
                                     </td>
@@ -88,33 +86,41 @@
                             }
                         </tbody>
                     </table>
-                    </div>
                 </div>
             </div>
         </div>
-    
-                    <p>
-                        <a asp-action="Index" asp-controller="Home">Volver al Inicio  </a>
-                    </p>
+    </div>
 
-                    <script>
-                        function ObtenId(elemento) {
-                            //alert(elemento.id);
-                            var idelement = elemento.id;
-                            alert(idelement);
-                            $.ajax({
-                                type="GET",
-                                url="AsignacionRevisores/",
-                                data={
-                                    "id_per": idelement,
-                                    "id_articulo": $("#id_ar").val(),
-                                    "comentariomemo": $("#come").val()
-                                },
-                                success: function () {
-
-                                }
-                            });
-                        }
-                    </script>
+    <p>
+        <a asp-action="Index" asp-controller="Home">Volver al Inicio  </a>
+    </p>
+    <script>
+        function ObtenId(elemento) {
+            //alert(elemento.id);
+            var idelement = elemento.id;
+            $.ajax({
+                type: "GET",
+                url: "AsignacionRevisores/",
+                data: {
+                    "id_per": idelement,
+                    "id_articulo": $("#id_ar").val(),
+                    "comentariomemo": $("#come").val()
+                },
+                success: function (result) {
+                    elemento.style.display = 'none';
+                    swal({
+                        position: 'top-end',
+                        type: 'success',
+                        title: 'Asignación Exitosa',
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function (response) {
+                    alert("no se pudo >:´v");
+                }
+            });
+        }
+    </script>
 </body>
 </html>

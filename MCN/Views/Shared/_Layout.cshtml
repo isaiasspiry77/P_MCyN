@@ -77,13 +77,23 @@
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
-                                <div>
-                                    <i class="fa fa-comment fa-fw"></i> New Comment
-                                    <span class="pull-right text-muted small">4 minutes ago</span>
-                                </div>
+                                @if (t == 3)
+                                {
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> @ViewData["notificacion"]
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>
+                                        <i class="fa fa-comment fa-fw"></i> New Notification
+                                        <span class="pull-right text-muted small">4 minutes ago</span>
+                                    </div>
+                                }   
                             </a>
                         </li>
-                        <li class="divider"></li>
+                        <!--li class="divider"></!--li>
                         <li>
                             <a href="#">
                                 <div>
@@ -125,7 +135,7 @@
                                 <strong>See All Alerts</strong>
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        </li>
+                        </li-->
                     </ul>
                     <!-- /.dropdown-alerts -->
                 </li>
