@@ -69,7 +69,7 @@ using MCN.Models;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(173, 107, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "4643de8c8d2149d2b60f47323d53f809", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0228ee5e883d4f8f814ec0eb80cfcacb", async() => {
                 BeginContext(179, 94, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>ListadoAutor</title>\r\n");
                 EndContext();
@@ -89,7 +89,7 @@ using MCN.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(282, 4376, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "62cd37af18cb44129f99bb4a47db45f6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "1bd55dbcef354ef39c77902b13407360", async() => {
                 BeginContext(288, 569, true);
                 WriteLiteral(@"
     <div class=""row"">
@@ -276,7 +276,7 @@ using MCN.Models;
                 WriteLiteral("\r\n                                    </td>\r\n                                    <td>\r\n                                        &nbsp;&nbsp;&nbsp;&nbsp;");
                 EndContext();
                 BeginContext(4010, 85, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "a57013c719d8487aacf6e2372938f532", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "fc9d86ac11634568b844dd9d596881c7", async() => {
                     BeginContext(4063, 28, true);
                     WriteLiteral("<i class=\"fa fa-pencil\"></i>");
                     EndContext();
@@ -311,7 +311,7 @@ using MCN.Models;
                 WriteLiteral("&nbsp;&nbsp;&nbsp;&nbsp;\r\n                                        ");
                 EndContext();
                 BeginContext(4161, 86, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "435587b0af5544859dddffe55798ba83", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bea6c6a613e94dccac76c15277cbf53e", async() => {
                     BeginContext(4217, 26, true);
                     WriteLiteral("<i class=\"fa fa-list\"></i>");
                     EndContext();
@@ -346,7 +346,7 @@ using MCN.Models;
                 WriteLiteral("&nbsp;&nbsp;&nbsp;&nbsp;\r\n                                        ");
                 EndContext();
                 BeginContext(4313, 87, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "7f222cd7ae43427793c7bb7c1a090664", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c67d75ba44bd4c45afed29fc987ff0db", async() => {
                     BeginContext(4368, 28, true);
                     WriteLiteral(" <i class=\"fa fa-times\"></i>");
                     EndContext();

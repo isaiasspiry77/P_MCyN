@@ -38,9 +38,9 @@
                                 <th>
                                     @Html.DisplayNameFor(model => model.RutaZipImagenesA)
                                 </th>
-                                <th>
+                                <!--th>
                                     @Html.DisplayNameFor(model => model.ComentariosAutor)
-                                </th>
+                                </th-->
                                 @if (i != 0)
                                 {
                                     <th>
@@ -72,9 +72,9 @@
                                     <td>
                                         @Html.ActionLink("Articulos", "DownloadZip", new { fullPath = (string)item.RutaZipImagenesA }, new { @class = "btn btn-success btn-block fa fa-download " })
                                     </td>
-                                    <td >
+                                    <!--td >
                                         <p align="justify">@Html.DisplayFor(modelItem => item.ComentariosAutor)</p> 
-                                    </td>
+                                    </td-->
                                     @if (item.FechaEdicionA != null)
                                     {
                                         i = 1;
