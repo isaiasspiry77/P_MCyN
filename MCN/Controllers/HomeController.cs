@@ -51,7 +51,7 @@ namespace MCN.Controllers
                 ViewData["id"] = id;
                 ViewData["correo"] = correo;
                 ViewData["tipo"] = tipo;
-
+                
                 return View();
             }
         }
