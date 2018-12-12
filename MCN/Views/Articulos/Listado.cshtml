@@ -1,10 +1,11 @@
 ﻿@model IEnumerable<MCN.Models.Articulo>
 
+
 @{
     ViewData["Title"] = "ListadoArticulos";
     ViewData["Tipo"] = ViewData["tipo"];
 
-    int i = 0;
+    int i = (int) ViewData["edicion"];
 }
 
 <!DOCTYPE html>
@@ -41,7 +42,7 @@
                                 <!--th>
                                     @Html.DisplayNameFor(model => model.ComentariosAutor)
                                 </th-->
-                                @if (i != 0)
+                                @if (i!=0)
                                 {
                                     <th>
                                         @Html.DisplayNameFor(model => model.FechaEdicionA)
@@ -59,41 +60,50 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.TituloArticulo)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FechaPublicacionA)
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Articulos", "DownloadPdf", new { fullPath = (string)item.RutaDocumentoA }, new { @class = "btn btn-success btn-block fa fa-download " })
-                                    </td>
-                                    <td>
-                                        @Html.ActionLink("Articulos", "DownloadZip", new { fullPath = (string)item.RutaZipImagenesA }, new { @class = "btn btn-success btn-block fa fa-download " })
-                                    </td>
-                                    <!--td >
-                                        <p align="justify">@Html.DisplayFor(modelItem => item.ComentariosAutor)</p> 
-                                    </td-->
-                                    @if (item.FechaEdicionA != null)
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.TituloArticulo)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FechaPublicacionA)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Articulos", "DownloadPdf", new { fullPath = (string)item.RutaDocumentoA }, new { @class = "btn btn-success btn-block fa fa-download " })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Articulos", "DownloadZip", new { fullPath = (string)item.RutaZipImagenesA }, new { @class = "btn btn-success btn-block fa fa-download " })
+                                </td>
+                                <!--td >
+        <p align="justify">@Html.DisplayFor(modelItem => item.ComentariosAutor)</p>
+    </td-->
+                                @if (i != 0)
+                                {
+                                    if (item.FechaEdicionA != null)
                                     {
-                                        i = 1;
                                         <td>
                                             @Html.DisplayFor(modelItem => item.FechaEdicionA)
                                         </td>
                                     }
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.RAutorNavigation.NombreA)
-                                        @Html.DisplayFor(modelItem => item.RAutorNavigation.ApellidosA)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
-                                    </td>
-                                    <td>
-                                        <a asp-action="Asignacion" asp-route-id="@item.IdArticulo"><i class="fa fa-share-square-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a asp-action="DetalleArticulo" asp-route-id="@item.IdArticulo"><i class="fa fa-list"></i></a>
-                                    </td>
-                                </tr>
+                                    else
+                                    {
+                                        <td>
+                                            Sin Ediciones
+                                        </td>
+                                    }
+                                }
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.RAutorNavigation.NombreA)
+                                    @Html.DisplayFor(modelItem => item.RAutorNavigation.ApellidosA)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
+                                </td>
+                                <td>
+                                    <a asp-action="Asignacion" asp-route-id="@item.IdArticulo"><i class="fa fa-share-square-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <a asp-action="DetalleArticulo" asp-route-id="@item.IdArticulo"><i class="fa fa-list"></i></a>
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

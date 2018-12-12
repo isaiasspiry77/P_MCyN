@@ -25,15 +25,22 @@ namespace MCN.Controllers
             var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
             var list = context.Articulo.Where(ar => ar.Status != 2);
 
+            int c = 0;
+
             foreach (Articulo a in list)
             {
                 a.RAutorNavigation = context.Autores.Where(au => au.IdAutores == a.RAutor).First();
                 a.StatusNavigation = context.Estados.Where(es => es.IdEstado == a.Status).First();
+                if(a.FechaEdicionA != null)
+                {
+                    c++;
+                }
             }
 
             ViewData["id"] = id;
             ViewData["correo"] = correo;
             ViewData["tipo"] = tipo;
+            ViewData["edicion"] = c;
 
             return View(list);
         }
@@ -46,7 +53,7 @@ namespace MCN.Controllers
             int id = (int)HttpContext.Session.GetInt32("id");
 
             var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
-            var list = context.Articulo.Where(ar => ar.Status ==9);
+            var list = context.Articulo.Where(ar => ar.Status == 9);
 
             foreach (Articulo a in list)
             {
@@ -235,8 +242,8 @@ namespace MCN.Controllers
 
             if (articulo == null) RedirectToAction(nameof(Listado));
 
-            articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor ).First();
-            ViewBag.Estados = context.Estados.Where(es => es.IdEstado != 9 && es.IdEstado>6).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
+            articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor).First();
+            ViewBag.Estados = context.Estados.Where(es => es.IdEstado != 9 && es.IdEstado > 6).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
 
             ViewData["id"] = idper;
             ViewData["correo"] = correo;
@@ -249,7 +256,7 @@ namespace MCN.Controllers
         // POST: Articulos/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Asignacion(int id, Articulo articulo , string textcoment)
+        public ActionResult Asignacion(int id, Articulo articulo, string textcoment)
         {
             string correo = HttpContext.Session.GetString("Correo");
             string pass = HttpContext.Session.GetString("pass");
@@ -275,15 +282,15 @@ namespace MCN.Controllers
                 arti.Status = 7;
                 context.Update(arti);
                 context.SaveChanges();
-                if(textcoment!= null)
+                if (textcoment != null)
                 {
                     HttpContext.Session.SetString("coment", textcoment);
                 }
-                if(id!=0)
+                if (id != 0)
                 {
                     HttpContext.Session.SetInt32("idArti", id);
                 }
-                
+
                 return RedirectToAction(nameof(RevisoresDisponibles));
             }
             catch
@@ -316,11 +323,11 @@ namespace MCN.Controllers
             ViewData["correo"] = correo;
             ViewData["tipo"] = tipo;
 
-            if(HttpContext.Session.GetInt32("idArti")!=0 || HttpContext.Session.GetInt32("idArti") != null){
+            if (HttpContext.Session.GetInt32("idArti") != 0 || HttpContext.Session.GetInt32("idArti") != null) {
                 ViewData["idArt"] = (int)HttpContext.Session.GetInt32("idArti");
                 HttpContext.Session.Remove("idArti");
             }
-            
+
             if (HttpContext.Session.GetString("coment") != null)
             {
                 ViewData["coment"] = HttpContext.Session.GetString("coment");
@@ -375,7 +382,7 @@ namespace MCN.Controllers
 
             if (Listdetalle == null)
             {
-                return RedirectToAction("Asignacion","Articulos", new {id_art = id });
+                return RedirectToAction("Asignacion", "Articulos", new { id_art = id });
             }
 
             foreach (DetalleArticulos d in Listdetalle)
@@ -385,11 +392,104 @@ namespace MCN.Controllers
             }
 
             ViewData["id"] = idper;
-            ViewData["correo"] = correo;  
+            ViewData["correo"] = correo;
             ViewData["tipo"] = tipo;
 
             return View(Listdetalle);
         }
 
+        [HttpGet]
+        public ActionResult EditarArticulo(int id)
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int idper = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            Articulo articuloedi = context.Articulo.Where(ar => ar.IdArticulo == id).First();
+
+            ViewData["id"] = idper;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(articuloedi);
+        }
+
+        [HttpPost]
+        public async Task <IActionResult> EditarArticulo(int id_ar, string titulo, IFormFile urlPdf, IFormFile urlImg, string coment)
+        {
+            try
+            {
+                var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+                var artiviejo = context.Articulo.Find(new object[] { id_ar });
+
+                artiviejo.TituloArticulo = titulo;
+
+                if(urlPdf != null)
+                {
+                    var PdfName = ContentDispositionHeaderValue.Parse(urlPdf.ContentDisposition.ToString()).FileName.Trim('"');
+                    var RootPath = _hostingEnv.WebRootPath;
+                    var pdfFullPath = Path.Combine(RootPath, "PdfUploaded");
+
+                    if (!Directory.Exists(pdfFullPath))
+                    {
+                        Directory.CreateDirectory(pdfFullPath);
+                    }
+
+                    var pdfFullName = pdfFullPath + Path.DirectorySeparatorChar + PdfName;
+                    using (var stream = new FileStream(pdfFullName, FileMode.Create))
+                        await urlPdf.CopyToAsync(stream);
+
+                    artiviejo.RutaDocumentoA = pdfFullName;
+                }
+                if (urlImg != null)
+                {
+                    var ZipName = ContentDispositionHeaderValue.Parse(urlImg.ContentDisposition.ToString()).FileName.Trim('"');
+                    var RootPath = _hostingEnv.WebRootPath;
+                    var imgFullPath = Path.Combine(RootPath, "ZipUploaded");
+
+                    if (!Directory.Exists(imgFullPath))
+                    {
+                        Directory.CreateDirectory(imgFullPath);
+                    }
+
+                    var imgFullName = imgFullPath + Path.DirectorySeparatorChar + ZipName;
+                    using (var stream2 = new FileStream(imgFullName, FileMode.Create))
+                        await urlImg.CopyToAsync(stream2);
+
+                    artiviejo.RutaZipImagenesA = imgFullName;
+                }
+
+                artiviejo.ComentariosAutor = coment;
+
+                DateTime dateNow = DateTime.Now.Date;
+                string formatMysql = dateNow.ToString("dd-MM-yyyy");
+
+                artiviejo.FechaEdicionA = formatMysql;
+                artiviejo.Status = 8;
+
+                context.Update(artiviejo);
+                context.SaveChanges();
+
+                return RedirectToAction(nameof(ListadoAutor));
+            }
+            catch {
+                return RedirectToAction(nameof(EditarArticulo));
+            }
+        }
+
+        [HttpGet]
+        public ActionResult Eliminar(int id)
+        {
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var articulo = context.Articulo.Find(new object[] { id });
+
+            articulo.Status = 2;
+            context.Update(articulo);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(ListadoAutor));
+        }
     }
 }

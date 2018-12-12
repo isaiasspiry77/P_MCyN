@@ -1,0 +1,60 @@
+﻿@model MCN.Models.Articulo
+
+@{
+    ViewData["Title"] = "EditarArticulos";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>EditarArticulo</title>
+</head>
+<body>
+
+<h4>Editar Articulo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="EditarArticulo" asp-controller="Articulos" method="post" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" value="@Html.DisplayFor(model => model.IdArticulo)" name="id_ar"/>
+            <div class="form-group">
+                <label asp-for="TituloArticulo" class="control-label"></label>
+                <input class="form-control" value="@Html.DisplayFor(model => model.TituloArticulo)"  name="titulo"/>
+                <!--input asp-for="TituloArticulo" class="form-control" /-->
+                <!--span asp-validation-for="TituloArticulo" class="text-danger"></span-->
+            </div>
+            <div class="form-group">
+                <label asp-for="RutaDocumentoA" class="control-label"></label>
+                <input type="file" class="form-control"  name="urlPdf" value="@Html.DisplayFor(model => model.RutaDocumentoA)"/>
+                <!--input asp-for="RutaDocumentoA" class="form-control" />
+                <span asp-validation-for="RutaDocumentoA" class="text-danger"></span-->
+            </div>
+            <div class="form-group">
+                <label asp-for="RutaZipImagenesA" class="control-label"></label>
+                <input type="file" class="form-control" name="urlImg" value="@Html.DisplayFor(model => model.RutaZipImagenesA)"/>
+                <!--input asp-for="RutaZipImagenesA" class="form-control" />
+                <span asp-validation-for="RutaZipImagenesA" class="text-danger"></span-->
+            </div>
+            <div class="form-group">
+                <label asp-for="ComentariosAutor" class="control-label"></label>
+                <textarea class="form-control" rows="5" name="coment">@Html.DisplayFor(model => model.ComentariosAutor)</textarea>
+                <!--input asp-for="ComentariosAutor" class="form-control" />
+                <span asp-validation-for="ComentariosAutor" class="text-danger"></span-->
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Reenviar Articulo" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListadoAutor" asp-controller="Articulos">Volver al listado</a>
+</div>
+
+</body>
+</html>

@@ -180,3 +180,5 @@ C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\View
 C:\Users\rafao\Source\Repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\DetalleArticulo.g.cshtml.cs
 C:\Users\rafao\Source\Repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\ListadoAceptados.g.cshtml.cs
 C:\Users\rafao\Source\Repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\ListadoRevisores.g.cshtml.cs
+C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\ListadoAceptados.g.cshtml.cs
+C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\EditarArticulo.g.cshtml.cs
