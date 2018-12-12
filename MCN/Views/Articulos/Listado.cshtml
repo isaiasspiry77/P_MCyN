@@ -90,8 +90,8 @@
                                         @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
                                     </td>
                                     <td>
-                                        <a asp-action="Asignacion" asp-route-id="@item.IdArticulo">Asignar Revisor</a> |
-                                        <a asp-action="DetalleArticulo" asp-route-id="@item.IdArticulo">Detalles del Articulo</a> |
+                                        <a asp-action="Asignacion" asp-route-id="@item.IdArticulo"><i class="fa fa-share-square-o"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a asp-action="DetalleArticulo" asp-route-id="@item.IdArticulo"><i class="fa fa-list"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -101,6 +101,6 @@
             </div>
         </div>
     </div>
-    <a asp-action="ListadoAceptados" asp-controller="Articulos">Articulos Aceptados</a>
+    <a asp-action="ListadoAceptados" asp-controller="Articulos"><button type="button" class="btn btn-default">Articulos Aceptados</button></a>
 </body>
 </html>
