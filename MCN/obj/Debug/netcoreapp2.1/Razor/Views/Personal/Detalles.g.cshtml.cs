@@ -65,7 +65,7 @@ using MCN.Models;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(110, 103, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "bca7b1208f7a484ea19107147ebb87eb", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "c25880d57abd492ea449261bcb4e0aa1", async() => {
                 BeginContext(116, 90, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Detalles</title>\r\n");
                 EndContext();
@@ -85,7 +85,7 @@ using MCN.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(215, 3225, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "31399f5d284f4ea6967fb453d512084f", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "114c09fd9cbf4eef8675d809e7cf3c33", async() => {
                 BeginContext(221, 368, true);
                 WriteLiteral(@"
 
@@ -303,7 +303,7 @@ using MCN.Models;
                 WriteLiteral("\r\n                    </dd>\r\n                </dl>\r\n            </div>\r\n                </div>\r\n            </div>\r\n        \r\n                <div>\r\n                    ");
                 EndContext();
                 BeginContext(3305, 102, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6afdd776b645469195e557630ca8d1a0", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6299cb06da444f4197a4c04ade8d1b2b", async() => {
                     BeginContext(3329, 74, true);
                     WriteLiteral("<button type=\"button\" class=\"btn btn-default\">Regresar al Listado</button>");
                     EndContext();

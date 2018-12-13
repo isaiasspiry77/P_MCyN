@@ -62,7 +62,7 @@ using MCN.Models;
             WriteLiteral("\r\n<div class=\"col\" style= \"padding-top:200px\",\"text-align:center\" >\r\n\r\n    ");
             EndContext();
             BeginContext(120, 95, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "0b7b3ba1c7084b42a69e55abc7b37714", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("img", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.SelfClosing, "ca183b48c98d45f68a967fb0b6d806a2", async() => {
             }
             );
             __Microsoft_AspNetCore_Mvc_Razor_TagHelpers_UrlResolutionTagHelper = CreateTagHelper<global::Microsoft.AspNetCore.Mvc.Razor.TagHelpers.UrlResolutionTagHelper>();
