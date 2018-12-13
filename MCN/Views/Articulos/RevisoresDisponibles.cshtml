@@ -20,7 +20,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    DataTables Advanced Tables
+                    Revisores disponibles
                 </div>
                 <!-- /.panel-heading -->
                 <div class="panel-body">
@@ -80,7 +80,7 @@
 
                                     <td>
                                         <input type="hidden" value="@item.IdPersonal" id=">@item.IdPersonal" />
-                                        <a href="#" id="@item.IdPersonal" onclick="ObtenId(this)">Asignar Articulo</a>
+                                        &nbsp;&nbsp; <a href="#" id="@item.IdPersonal" onclick="ObtenId(this)"><i class="fa fa-share-square-o"></i></a>
                                     </td>
                                 </tr>
                             }
@@ -92,7 +92,7 @@
     </div>
 
     <p>
-        <a asp-action="Index" asp-controller="Home">Volver al Inicio  </a>
+        <a asp-action="Index" asp-controller="Home"><button type="button" class="btn btn-default">Volver al inicio</button></a>
     </p>
     <script>
         function ObtenId(elemento) {

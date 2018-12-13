@@ -63,10 +63,10 @@
                                         @Html.DisplayFor(modelItem => item.FechaPublicacionA)
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Articulos", "DownloadPdf", new{ fullPath = (string) item.RutaDocumentoA })
+                                        @Html.ActionLink("Articulos", "DownloadPdf", new{ fullPath = (string) item.RutaDocumentoA }, new { @class = "btn btn-success btn-block fa fa-download " })
                                     </td>
                                     <td>
-                                        @Html.ActionLink("Articulos", "DownloadZip", new { fullPath = (string)item.RutaZipImagenesA })
+                                        @Html.ActionLink("Imagenes", "DownloadZip", new { fullPath = (string)item.RutaZipImagenesA }, new { @class = "btn btn-success btn-block fa fa-download " })
                                     </td>
                                     <td> 
                                         @Html.DisplayFor(modelItem => item.ComentariosAutor)
