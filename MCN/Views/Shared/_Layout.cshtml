@@ -197,7 +197,7 @@
                         @if (t == 2 || t == 5)
                         {
                             <li>
-                                <a href="volumenes.html"><i class="fa fa-book fa-fw"></i> Volumenes</a>
+                                <a asp-action="Volumenes" asp-controller="Volumenes"><i class="fa fa-book fa-fw"></i> Volumenes</a>
                             </li>
                         }
 
@@ -480,8 +480,6 @@
 
     </script>
 
-
-
     <!--script para agregar nueva linea de trabajo-->
     <script>
         $(document).ready(function () {
@@ -611,7 +609,21 @@
                             })
                             return false;
                         }
-
+                        $.ajax({
+                            type: "GET",
+                            url: "/Coautores/AgregarCoautor/",
+                            data: {
+                                "nombre": nombre,
+                                "apellido": apellidos,
+                                "email" : correo
+                            }, success: function (result) {
+                                //alert("si entro");
+                                alert(result);
+                            }, error: function (response) {
+                                alert(nombre + "" + apellidos+""+correo);
+                            }
+                            
+                        });
                         /*$.ajax({
                             type: "GET",
                             url: "/Coautores/AgregarCoautor/",

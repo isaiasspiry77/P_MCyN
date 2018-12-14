@@ -36,12 +36,19 @@ namespace MCN.Models
         public virtual DbSet<TipoPersonal> TipoPersonal { get; set; }
         public virtual DbSet<Volumen> Volumen { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        /*protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseMySql("Server=localhost;Database=proyecto_r_mcyn;User=root;Password=1234;");
+            }
+        }*/
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseMySql(connectionString);
             }
         }
 

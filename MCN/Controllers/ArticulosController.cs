@@ -398,6 +398,25 @@ namespace MCN.Controllers
             return View(Listdetalle);
         }
 
+        public ActionResult DetalleArticuloAutor(int id)
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int idau = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var articulo = context.Articulo.Where(ar => ar.IdArticulo == id && ar.Status != 2).First();
+
+            articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == idau).First();
+
+            ViewData["id"] = idau;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(articulo);
+        }
+
         [HttpGet]
         public ActionResult EditarArticulo(int id)
         {

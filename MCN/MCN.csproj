@@ -2,6 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
+    <UserSecretsId>7a103106-1c78-4e5b-9085-b39795bafdee</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -18,5 +19,7 @@
   <ItemGroup>
     <Folder Include="wwwroot\Template\" />
   </ItemGroup>
+
+  <ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JSONSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
