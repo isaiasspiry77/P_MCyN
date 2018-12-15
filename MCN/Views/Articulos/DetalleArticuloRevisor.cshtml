@@ -1,0 +1,70 @@
+﻿@model MCN.Models.DetalleArticulos
+
+@{
+    ViewData["Title"] = "DetalleArticuloRevisor";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DetalleArticuloRevisor</title>
+</head>
+<body>
+
+<div>
+    <h4>DetalleArticulos</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.TituloArticulo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdArticuloNavigation.TituloArticulo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.ComentariosAutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdArticuloNavigation.ComentariosAutor)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaRevision)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaRevision)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.ComentariosRetroaliment)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ComentariosRetroaliment)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.RAutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdArticuloNavigation.RAutorNavigation.NombreA)
+            @Html.DisplayFor(model => model.IdArticuloNavigation.RAutorNavigation.ApellidosA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.StatusNavigation.DescEstados)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="ListadoRevisores">Volver al listado</a>
+</div>
+</body>
+</html>

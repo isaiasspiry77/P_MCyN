@@ -119,9 +119,9 @@ namespace MCN.Controllers
                 context.Autores.Add(autor);
                 context.SaveChanges();
 
-                return RedirectToAction("Account", "Login");
+                return RedirectToAction("Login", "Account");
             }
-            catch (Exception ex)
+            catch
             {
                 return View();
             }

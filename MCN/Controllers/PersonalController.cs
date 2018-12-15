@@ -96,7 +96,7 @@ namespace MCN.Controllers
             var tc = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
 
             //ViewBag.idInstituciones = tc.CatInstituciones.Select(i => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = i.NombreInstituto, Value = i.IdInstituto.ToString() });
-            ViewBag.TipoP = tc.TipoPersonal.Where(tp=> tp.IdTipoP>2).Select(tp => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = tp.TipoUsuarios, Value = tp.IdTipoP.ToString() });
+            ViewBag.TipoP = tc.TipoPersonal.Where(tp=> tp.IdTipoP>2 && tp.IdTipoP<6).Select(tp => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = tp.TipoUsuarios, Value = tp.IdTipoP.ToString() });
             ViewBag.IdInstituciones = tc.CatInstituciones.Select(ci => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = ci.NombreInstituto, Value = ci.IdInstituto.ToString() });
             ViewBag.IdExtenciones = tc.CatExtenciones.Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.NombreExtencion, Value = e.IdExtenciones.ToString() });
             ViewBag.IdGradoEst = tc.CatGradoEstudio.Select(g => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = g.NivelEstudio, Value = g.IdGradoEst.ToString() });

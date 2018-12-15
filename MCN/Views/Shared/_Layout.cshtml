@@ -617,43 +617,26 @@
                                 "apellido": apellidos,
                                 "email" : correo
                             }, success: function (result) {
-                                //alert("si entro");
-                                alert(result);
+                                //alert("result");
+                                var ul = document.getElementById('ul');
+                                var li = document.createElement('li');
+                                var texto = nombre + " " + apellidos;
+
+                                var checkbox = document.createElement('input');
+                                checkbox.type = "checkbox";
+                                checkbox.name = "coautor";
+                                checkbox.value = result;
+                                checkbox.id = "coautor";
+
+                                li.appendChild(checkbox);
+                                li.appendChild(document.createTextNode(texto));
+                                ul.appendChild(li);
                             }, error: function (response) {
                                 alert(nombre + "" + apellidos+""+correo);
                             }
                             
                         });
-                        /*$.ajax({
-                            type: "GET",
-                            url: "/Coautores/AgregarCoautor/",
-                            data: {
-                                "nombre": $("#nombre_coautor").val(),
-                                "apellidos": $("#Apellidos_coautor").val(),
-                                "email": $("#correo_coautor").val()
-                            },
-                            success: function (result) {
-                                swal({
-                                    position: 'top-end',
-                                    type: 'success',
-                                    title: 'Se a agregado correctamente el Coautor',
-                                    footer: '<a href="SubirArticulo"><font size=2>Recarge la Pagina</font></a>',
-                                    showConfirmButton: false
-                                })
-                            }, error: function (response) {
-                                swal.showValidationMessage(
-                                    `Request failed: ${error}`
-                                )}
-                        });
                     }
-                })
-            },
-                error: function (response) {
-                    console.log(response);
-                }
-                })*/
-                    }
-
                 });
             });
         });

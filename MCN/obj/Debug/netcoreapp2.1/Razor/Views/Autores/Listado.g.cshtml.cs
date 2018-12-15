@@ -66,7 +66,7 @@ using MCN.Models;
             WriteLiteral("\r\n<!DOCTYPE html>\r\n\r\n\r\n<html>\r\n");
             EndContext();
             BeginContext(165, 102, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "f4dea953e3c04b35997e7b89e95cf3a3", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("head", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "208f9ecadc8d470ba32218c3a7d8bac2", async() => {
                 BeginContext(171, 89, true);
                 WriteLiteral("\r\n    <meta name=\"viewport\" content=\"width=device-width\" />\r\n    <title>Listado</title>\r\n");
                 EndContext();
@@ -86,7 +86,7 @@ using MCN.Models;
             WriteLiteral("\r\n");
             EndContext();
             BeginContext(269, 2310, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "ff73e9b025f54a0a8a97ff2d99342ded", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("body", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "47a58c2bce1b4435a88d4c9f96d059dd", async() => {
                 BeginContext(275, 603, true);
                 WriteLiteral(@"
 
@@ -174,7 +174,7 @@ using MCN.Models;
                 WriteLiteral("\r\n                                    </td>\r\n                                    <td>\r\n                                         ");
                 EndContext();
                 BeginContext(2199, 122, false);
-                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "8549bacd39654acaa7b1d816f8e7c845", async() => {
+                __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "51b2ab96cec640cfabe1c81c70ee8a77", async() => {
                     BeginContext(2253, 64, true);
                     WriteLiteral("<button type=\"button\" class=\"btn btn-danger\" > Eliminar</button>");
                     EndContext();

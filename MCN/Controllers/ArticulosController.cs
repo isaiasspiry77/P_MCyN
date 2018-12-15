@@ -104,6 +104,7 @@ namespace MCN.Controllers
             {
                 d.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == d.IdArticulo).First();
                 d.IdPersonalNavigation = context.Personal.Where(p => p.IdPersonal == id).First();
+                d.StatusNavigation = context.Estados.Where(e => e.IdEstado == d.Status).First();
             }
 
             ViewData["id"] = id;
@@ -137,7 +138,7 @@ namespace MCN.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SubirArticulo(string titulo, IFormFile urlPdf, IFormFile urlImg, string coment)
+        public async Task<IActionResult> SubirArticulo(string titulo, IFormFile urlPdf, IFormFile urlImg, string coment, int[] coautor=null)
         {
             string correo = HttpContext.Session.GetString("Correo");
             string pass = HttpContext.Session.GetString("pass");
@@ -190,6 +191,19 @@ namespace MCN.Controllers
 
                 context.Articulo.Add(articulo);
                 context.SaveChanges();
+
+                //hechizo de coautores
+                if (coautor != null)
+                {
+                    foreach (int v in coautor)
+                    {
+                        var c = context.Coautores.Find(new object[] { v });
+                        int idar = context.Articulo.OrderByDescending(x => x.IdArticulo).First().IdArticulo;
+                        c.RArticulo = idar;
+                        context.Update(c);
+                        context.SaveChanges();
+                    }
+                }
 
                 ViewData["id"] = id;
                 ViewData["correo"] = correo;
@@ -409,6 +423,7 @@ namespace MCN.Controllers
             var articulo = context.Articulo.Where(ar => ar.IdArticulo == id && ar.Status != 2).First();
 
             articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == idau).First();
+            articulo.StatusNavigation = context.Estados.Where(e => e.IdEstado == articulo.Status).First();
 
             ViewData["id"] = idau;
             ViewData["correo"] = correo;
@@ -416,6 +431,28 @@ namespace MCN.Controllers
 
             return View(articulo);
         }
+
+        public ActionResult DetalleArticuloRevisor(int id)
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int idper = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            DetalleArticulos articulo = context.DetalleArticulos.Where(ar => ar.IdDetalleArt == id).First();
+
+            articulo.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == articulo.IdArticulo).First();
+            articulo.StatusNavigation = context.Estados.Where(e => e.IdEstado == articulo.Status).First();
+            articulo.IdArticuloNavigation.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.IdArticuloNavigation.RAutor).First();
+
+            ViewData["id"] = idper;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(articulo);
+        }
+
 
         [HttpGet]
         public ActionResult EditarArticulo(int id)
