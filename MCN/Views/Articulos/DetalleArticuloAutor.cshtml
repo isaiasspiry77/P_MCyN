@@ -14,63 +14,73 @@
 </head>
 <body>
 
-<div>
-    <h4>Articulo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.TituloArticulo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.TituloArticulo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaPublicacionA)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FechaPublicacionA)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.RutaDocumentoA)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RutaDocumentoA)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.RutaZipImagenesA)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RutaZipImagenesA)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ComentariosAutor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ComentariosAutor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaEdicionA)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FechaEdicionA)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.RAutor)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.RAutorNavigation.NombreA)
-            @Html.DisplayFor(model => model.RAutorNavigation.ApellidosA)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StatusNavigation.DescEstados)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="ListadoAutor" asp-controller="Articulos">Volver al Listado</a>
-</div>
+    <div class="row">
+        <h4>Articulo</h4>
+        <hr />
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Detalle de articulos
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                            <dt>
+                                @Html.DisplayNameFor(model => model.TituloArticulo):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.TituloArticulo)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaPublicacionA):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaPublicacionA)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RutaDocumentoA):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RutaDocumentoA)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RutaZipImagenesA):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RutaZipImagenesA)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.ComentariosAutor):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.ComentariosAutor)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.FechaEdicionA):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.FechaEdicionA)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.RAutor):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.RAutorNavigation.NombreA)
+                                @Html.DisplayFor(model => model.RAutorNavigation.ApellidosA)
+                            </dd>
+                            <dt>
+                                @Html.DisplayNameFor(model => model.Status):
+                            </dt>
+                            <dd>
+                                @Html.DisplayFor(model => model.StatusNavigation.DescEstados)
+                            </dd>
+                        </dl>
+                </div>
+                </div>
+            </div>
+        </div>
+    
+                <div>
+                    <a asp-action="ListadoAutor" asp-controller="Articulos"><button type="button" class="btn btn-default">Volver al listado</button></a>
+                </div>
 </body>
 </html>

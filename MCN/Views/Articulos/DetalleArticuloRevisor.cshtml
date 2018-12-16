@@ -14,57 +14,66 @@
 </head>
 <body>
 
-<div>
-    <h4>Detalle de Articulo</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.IdArticuloNavigation.TituloArticulo)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdArticuloNavigation.TituloArticulo)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IdArticuloNavigation.FechaPublicacionA)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdArticuloNavigation.FechaPublicacionA)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IdArticuloNavigation.ComentariosAutor)
-        </dt>
-        <dd align="justify">
-            @Html.DisplayFor(model => model.IdArticuloNavigation.ComentariosAutor)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.FechaRevision)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.FechaRevision)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.IdPersonal)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.IdPersonalNavigation.NombreP)
-            @Html.DisplayFor(model => model.IdPersonalNavigation.ApellidoP)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.ComentariosRetroaliment)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.ComentariosRetroaliment)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.Status)
-        </dt>
-        <dd>
-            @Html.DisplayFor(model => model.StatusNavigation.DescEstados)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="ListadoRevisores">Volver al listado</a>
-</div>
+    <div class="row">
+        <h4>Detalle de Articulo</h4>
+        <hr />
+        <div class="col-lg-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    Detalle de articulos
+                </div>
+                <div class="panel-body">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IdArticuloNavigation.TituloArticulo)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.IdArticuloNavigation.TituloArticulo)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IdArticuloNavigation.ComentariosAutor)
+                        </dt>
+                        <dd align="justify">
+                            @Html.DisplayFor(model => model.IdArticuloNavigation.ComentariosAutor)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FechaRevision)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.FechaRevision)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.IdPersonal)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.IdPersonalNavigation.NombreP)
+                            @Html.DisplayFor(model => model.IdPersonalNavigation.ApellidoP)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ComentariosRetroaliment)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ComentariosRetroaliment)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Status)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.StatusNavigation.DescEstados)
+                        </dd>
+                    </dl>
+                </div>
+                </div>
+            </div>
+        </div>
+                <div>
+                    <a asp-action="ListadoRevisores"><button type="button" class="btn btn-default">Volver al listado</button></a>
+                </div>
 </body>
 </html>
