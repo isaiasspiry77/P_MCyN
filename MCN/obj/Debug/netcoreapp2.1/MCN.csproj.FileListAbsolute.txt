@@ -189,3 +189,9 @@ C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\UserSecret
 C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\DetalleArticuloRevisor.g.cshtml.cs
 C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\Revisar.g.cshtml.cs
 C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\Intermedio.g.cshtml.cs
+C:\Users\rafao\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
+C:\Users\rafao\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\DetalleArticuloAutor.g.cshtml.cs
+C:\Users\rafao\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\DetalleArticuloRevisor.g.cshtml.cs
+C:\Users\rafao\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\Intermedio.g.cshtml.cs
+C:\Users\rafao\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\Revisar.g.cshtml.cs
+C:\Users\rafao\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Volumenes\Volumenes.g.cshtml.cs
