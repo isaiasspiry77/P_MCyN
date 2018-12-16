@@ -4,6 +4,8 @@
     ViewData["Title"] = "ListadoDetalleArticulos";
     ViewData["Tipo"] = ViewData["tipo"];
     int r = (int)ViewData["tipo"];
+    int id_art = (int)ViewData["idArt"];
+    int bandera = 0;
 }
 
 <!DOCTYPE html>
@@ -70,7 +72,7 @@
                                     @if (item.ComentariosRetroaliment != null)
                                     {
                                         <td>
-                                            @Html.DisplayFor(modelItem => item.ComentariosRetroaliment)
+                                            @Html.ActionLink("", "DownloadArchivo", new { fullPath = (string)item.ComentariosRetroaliment }, new { @class = "btn btn-success btn-block fa fa-file-word-o " })
                                         </td>
                                     }
                                     else
@@ -84,6 +86,10 @@
                                         @Html.DisplayFor(modelItem => item.IdPersonalNavigation.ApellidoP)
                                     </td>
                                     <td>
+                                        @if(item.Status != 7)
+                                        {
+                                            bandera++;
+                                        }
                                         @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
                                     </td>
                                 </tr>
@@ -94,9 +100,14 @@
             </div>
         </div>
     </div>
-        <p>
-            <a asp-action="Listado" asp-controller="Articulos"><button type="button" class="btn btn-default">Volver al listado</button></a>
-        </p>
+    <p>
+        <a asp-action="Listado" asp-controller="Articulos"><button type="button" class="btn btn-default">Volver al listado</button></a>
+        @if (bandera > 0)
+        {
+            <a asp-action="Intermedio" asp-controller="Articulos" asp-route-id="@id_art"><button type="button" class="btn btn-default">Definir Estado Articulo</button></a>
+        }
+
+    </p>
 
 </body>
 </html>

@@ -39,6 +39,7 @@ namespace MCN.Controllers
 
             Autores InfoAutor = context.Autores.Where(pa => pa.IdAutores == id && pa.Status != 2).First();
 
+            InfoAutor.TipoANavigation = context.TipoPersonal.Where(t => t.IdTipoP == InfoAutor.TipoA).First();
             InfoAutor.StatusNavigation = context.Estados.Where(es => es.IdEstado == InfoAutor.Status).First();
 
             ViewData["id"] = id;

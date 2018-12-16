@@ -1,0 +1,65 @@
+﻿@model MCN.Models.Articulo
+
+@{
+    ViewData["Title"] = "RevisarArticulo";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Intermedio</title>
+</head>
+<body>
+
+<h4>Articulo</h4>
+<hr />
+<div class="row">
+
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.TituloArticulo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.TituloArticulo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FechaPublicacionA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FechaPublicacionA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor( model => model.RAutor)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RAutorNavigation.NombreA)
+            @Html.DisplayFor(model => model.RAutorNavigation.ApellidosA)
+        </dd>
+    </dl>
+
+    <div class="col-md-4">
+        <form asp-action="Intermedio">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdArticulo" />
+           
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="ViewBag.Estados"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Determinar Estado" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Listado" asp-controller="Articulos">Volver al Listado</a>
+</div>
+
+</body>
+</html>

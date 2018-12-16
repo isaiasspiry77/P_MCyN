@@ -1,0 +1,68 @@
+﻿@model MCN.Models.DetalleArticulos
+
+@{
+    ViewData["Title"] = "RevisarArticulo";
+    ViewData["Tipo"] = ViewData["tipo"];
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Revisar</title>
+</head>
+<body>
+
+<h4>DetalleArticulos</h4>
+<hr />
+<div class="row">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.TituloArticulo)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdArticuloNavigation.TituloArticulo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IdArticuloNavigation.FechaPublicacionA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IdArticuloNavigation.ComentariosAutor)
+        </dt>
+        <dd align="justify">
+            @Html.DisplayFor(model => model.IdArticuloNavigation.ComentariosAutor)
+        </dd>
+    </dl>
+    
+    <div class="col-md-4">
+        <form asp-action="Revisar" enctype="multipart/form-data" method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="IdDetalleArt" />
+
+            <div class="form-group">
+                <label asp-for="ComentariosRetroaliment" class="control-label"></label>
+                <input  class="form-control"  type="file" name="comentario"/>
+                <!--span asp-validation-for="ComentariosRetroaliment" class="text-danger"></span-->
+            </div>
+            <div class="form-group">
+                <label asp-for="Status" class="control-label"></label>
+                <select asp-for="Status" class="form-control" asp-items="ViewBag.Estados"></select>
+                <span asp-validation-for="Status" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="ListadoRevisores" asp-controller="Articulos">Volver al Listado</a>
+</div>
+
+</body>
+</html>

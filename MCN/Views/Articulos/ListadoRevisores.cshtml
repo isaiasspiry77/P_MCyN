@@ -26,6 +26,12 @@
                         <thead>
                             <tr>
                                 <th>
+                                    @Html.DisplayNameFor(model => model.IdArticuloNavigation.RutaDocumentoA)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.IdArticuloNavigation.RutaZipImagenesA)
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.FechaRevision)
                                 </th>
                                 <th>
@@ -40,39 +46,46 @@
                         <tbody>
                             @foreach (var item in Model)
                             {
-                                <tr>
-                                    @if (item.FechaRevision != null)
-                                    {
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.FechaRevision)
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            En espera de Revisión
-                                        </td>
-                                    }
-                                    @if (item.ComentariosRetroaliment != null)
-                                    {
-                                        <td>
-                                            @Html.DisplayFor(modelItem => item.ComentariosRetroaliment)
-                                        </td>
-                                    }
-                                    else
-                                    {
-                                        <td>
-                                            En espera de Revisión
-                                        </td>
-                                    }
+                            <tr>
+                                <td>
+                                    @Html.ActionLink("", "DownloadPdf", new { fullPath = (string)item.IdArticuloNavigation.RutaDocumentoA }, new { @class = "btn btn-success btn-block fa fa-file-word-o " })
+                                </td>
+                                <td>
+                                    @Html.ActionLink("", "DownloadZip", new { fullPath = (string)item.IdArticuloNavigation.RutaZipImagenesA }, new { @class = "btn btn-success btn-block fa fa-file-zip-o " })
+                                </td>
+                                
+                                @if (item.FechaRevision != null)
+                                {
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
+                                        @Html.DisplayFor(modelItem => item.FechaRevision)
                                     </td>
+                                }
+                                else
+                                {
                                     <td>
-                                        <a asp-action="" asp-route-id="@item.IdDetalleArt"><i class="fa fa-pencil"></i></a>&nbsp;&nbsp;
-                                        <a asp-action="DetalleArticuloRevisor" asp-route-id="@item.IdDetalleArt"><i class="fa fa-list"></i></a> &nbsp;&nbsp;
+                                        En espera de Revisión
                                     </td>
-                                </tr>
+                                }
+                                @if (item.ComentariosRetroaliment != null)
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ComentariosRetroaliment)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        En espera de Revisión
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.StatusNavigation.DescEstados)
+                                </td>
+                                <td>
+                                    <a asp-action="Revisar" asp-route-id="@item.IdDetalleArt"><i class="fa fa-check-square-o"></i></a>&nbsp;&nbsp;
+                                    <a asp-action="DetalleArticuloRevisor" asp-route-id="@item.IdDetalleArt"><i class="fa fa-list"></i></a> &nbsp;&nbsp;
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table>

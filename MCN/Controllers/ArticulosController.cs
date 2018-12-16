@@ -81,6 +81,7 @@ namespace MCN.Controllers
             foreach (Articulo a in list)
             {
                 a.RAutorNavigation = context.Autores.Where(au => au.IdAutores == a.RAutor).First();
+                a.StatusNavigation = context.Estados.Where(e => e.IdEstado == a.Status).First();
             }
 
             ViewData["id"] = id;
@@ -243,6 +244,12 @@ namespace MCN.Controllers
             return File(filebyte, System.Net.Mime.MediaTypeNames.Application.Octet, "ImagenesdePublicacion.zip");
         }
 
+        public FileContentResult DownloadArchivo(string fullPath)
+        {
+            byte[] filebyte = GetFile(fullPath);
+            return File(filebyte, System.Net.Mime.MediaTypeNames.Application.Octet, "ComentariosRevision.docx");
+        }
+
         // GET: Articulos/Details/5
         public ActionResult Asignacion(int id)
         {
@@ -257,7 +264,7 @@ namespace MCN.Controllers
             if (articulo == null) RedirectToAction(nameof(Listado));
 
             articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor).First();
-            ViewBag.Estados = context.Estados.Where(es => es.IdEstado != 9 && es.IdEstado > 6).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
+            ViewBag.Estados = context.Estados.Where(es => es.IdEstado != 9 && es.IdEstado > 6 && es.IdEstado<11).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
 
             ViewData["id"] = idper;
             ViewData["correo"] = correo;
@@ -284,6 +291,18 @@ namespace MCN.Controllers
                 var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
                 var arti = context.Articulo.Find(new object[] { id });
 
+                DetalleArticulos detalleArticulo = new DetalleArticulos();
+                detalleArticulo.IdPersonal = idper;
+                detalleArticulo.IdArticulo = id;
+                DateTime dateNow = DateTime.Now.Date;
+                string formatMysql = dateNow.ToString("dd-MM-yyyy");
+                detalleArticulo.FechaRevision = formatMysql; 
+                detalleArticulo.ComentariosRetroaliment = textcoment;
+                detalleArticulo.Status = 7;
+
+                context.DetalleArticulos.Add(detalleArticulo);
+                context.SaveChanges();
+
                 if (articulo.Status == 10)
                 {
                     arti.Status = articulo.Status;
@@ -293,7 +312,7 @@ namespace MCN.Controllers
                     return RedirectToAction(nameof(Listado));
                 }
 
-                arti.Status = 7;
+                arti.Status = articulo.Status;
                 context.Update(arti);
                 context.SaveChanges();
                 if (textcoment != null)
@@ -359,6 +378,12 @@ namespace MCN.Controllers
             {
                 // TODO: Add delete logic here
                 var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+
+                var articulo = context.Articulo.Find(new object[] { id_articulo });
+                articulo.Status = 7;
+                context.Update(articulo);
+                context.SaveChanges();
+
                 DetalleArticulos detalle = new DetalleArticulos();
 
                 detalle.Status = 7;
@@ -408,6 +433,7 @@ namespace MCN.Controllers
             ViewData["id"] = idper;
             ViewData["correo"] = correo;
             ViewData["tipo"] = tipo;
+            ViewData["idArt"] = id;
 
             return View(Listdetalle);
         }
@@ -440,19 +466,97 @@ namespace MCN.Controllers
             int idper = (int)HttpContext.Session.GetInt32("id");
 
             var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
-            DetalleArticulos articulo = context.DetalleArticulos.Where(ar => ar.IdDetalleArt == id).First();
+            var c = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            DetalleArticulos articulo = context.DetalleArticulos.Find(new object[] { id });
 
-            articulo.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == articulo.IdArticulo).First();
-            articulo.StatusNavigation = context.Estados.Where(e => e.IdEstado == articulo.Status).First();
-            articulo.IdArticuloNavigation.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.IdArticuloNavigation.RAutor).First();
+            var id_ar = articulo.IdArticulo;
+            var list = context.DetalleArticulos.Where(da => da.IdArticulo == id_ar);
+            DetalleArticulos articulod = null;
+
+            foreach (DetalleArticulos d in list)
+            {
+                d.IdPersonalNavigation = context.Personal.Where(pi => pi.IdPersonal == d.IdPersonal).First();
+                if (d.IdPersonalNavigation.TipoP ==2 || d.IdPersonalNavigation.TipoP == 5)
+                {
+                    articulod = d;
+                }
+            }
+
+            articulod.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == articulod.IdArticulo).First();
+            articulod.StatusNavigation = context.Estados.Where(e => e.IdEstado == articulod.Status).First();
+            articulod.IdArticuloNavigation.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulod.IdArticuloNavigation.RAutor).First();
 
             ViewData["id"] = idper;
             ViewData["correo"] = correo;
             ViewData["tipo"] = tipo;
 
-            return View(articulo);
+            return View(articulod);
         }
 
+        public ActionResult Revisar(int id)
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int idper = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var detalle = context.DetalleArticulos.Where(d => d.IdDetalleArt == id).First();
+
+            detalle.IdArticuloNavigation = context.Articulo.Where(ar => ar.IdArticulo == detalle.IdArticulo).First();
+            detalle.IdPersonalNavigation = context.Personal.Where(per => per.IdPersonal == detalle.IdPersonal).First();
+            ViewBag.Estados = context.Estados.Where(es => es.IdEstado >= 9).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
+
+            ViewData["id"] = idper;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(detalle);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Revisar(DetalleArticulos detalleArticulos, IFormFile comentario)
+        {
+
+            try
+            {
+                var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+                var detalle = context.DetalleArticulos.Find(new object[] { detalleArticulos.IdDetalleArt });
+
+                if (comentario != null)
+                {
+                    var ComentName = ContentDispositionHeaderValue.Parse(comentario.ContentDisposition.ToString()).FileName.Trim('"');
+                    var RootPath = _hostingEnv.WebRootPath;
+                    var ComentFullPath = Path.Combine(RootPath, "ComentsUploaded");
+
+                    if (!Directory.Exists(ComentFullPath))
+                    {
+                        Directory.CreateDirectory(ComentFullPath);
+                    }
+
+                    var ComentFullName = ComentFullPath + Path.DirectorySeparatorChar + ComentName;
+                    using (var stream = new FileStream(ComentFullName, FileMode.Create))
+                        await comentario.CopyToAsync(stream);
+
+                    detalle.ComentariosRetroaliment = ComentFullName;
+                    detalle.Status = detalleArticulos.Status;
+
+                    DateTime dateNow = DateTime.Now.Date;
+                    string formatMysql = dateNow.ToString("dd-MM-yyyy");
+
+                    detalle.FechaRevision = formatMysql;
+                    context.Update(detalle);
+                    context.SaveChanges();
+
+                    return RedirectToAction(nameof(ListadoRevisores));
+                }
+                return RedirectToAction(nameof(Revisar));
+            }
+            catch
+            {
+                return RedirectToAction(nameof(Revisar));
+            }
+        }
 
         [HttpGet]
         public ActionResult EditarArticulo(int id)
@@ -546,6 +650,41 @@ namespace MCN.Controllers
             context.SaveChanges();
 
             return RedirectToAction(nameof(ListadoAutor));
+        }
+
+        public ActionResult Intermedio(int id)
+        {
+            string correo = HttpContext.Session.GetString("Correo");
+            string pass = HttpContext.Session.GetString("pass");
+            int tipo = (int)HttpContext.Session.GetInt32("tipo");
+            int idper = (int)HttpContext.Session.GetInt32("id");
+
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var articulo = context.Articulo.Where(ar => ar.IdArticulo == id).First();
+
+            articulo.RAutorNavigation = context.Autores.Where(au => au.IdAutores == articulo.RAutor).First();
+            ViewBag.Estados = context.Estados.Where(es => es.IdEstado >9).Select(e => new Microsoft.AspNetCore.Mvc.Rendering.SelectListItem { Text = e.DescEstados, Value = e.IdEstado.ToString() });
+
+            ViewData["id"] = idper;
+            ViewData["correo"] = correo;
+            ViewData["tipo"] = tipo;
+
+            return View(articulo);
+        }
+
+        [HttpPost]
+        public ActionResult Intermedio(Articulo articulo)
+        {
+            var context = HttpContext.RequestServices.GetService(typeof(proyecto_r_mcynContext)) as proyecto_r_mcynContext;
+            var artiviejo = context.Articulo.Find(new object[] { articulo.IdArticulo});
+
+            artiviejo.Status = articulo.Status;
+
+            context.Update(artiviejo);
+            context.SaveChanges();
+
+            return RedirectToAction(nameof(Listado));
+
         }
     }
 }

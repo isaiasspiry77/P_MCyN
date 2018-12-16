@@ -1,6 +1,6 @@
 ﻿@{
     int t = (int)ViewData["Tipo"];
-
+    string noti = ViewData["notificacion"] as string;
 }
 
 <!DOCTYPE html>
@@ -14,8 +14,14 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>MCYN | Bootstrap Admin Theme</title>
-
+    @if (t == 1)
+    {
+    <title>MCYN | Autores</title>
+    }
+    else
+    {
+        <title>MCYN | Administracion</title>
+    }
 
     <!-- Bootstrap Core CSS -->
     <link href="~/Template/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -63,7 +69,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a  asp-action="Index" asp-controller="Home" class="navbar-brand">@t</a>
+                <a asp-action="Index" asp-controller="Home" class="navbar-brand">MCyN</a>
                 <!--img  src="~/images/MateriaCienciaNanociencia.png" width="150px" height="80px" class="center" id="wrapper"/-->
             </div>
             <!-- /.navbar-header -->
@@ -72,17 +78,34 @@
                 <!-- /.dropdown -->
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                        <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        @if (noti != null)
+                        {
+                            <i class="fa fa-bell-o fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        }
+                        else
+                        {
+                            <i class="fa fa-bell fa-fw"></i> <i class="fa fa-caret-down"></i>
+                        }
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
                         <li>
                             <a href="#">
                                 @if (t == 3)
                                 {
-                                    <div>
-                                        <i class="fa fa-comment fa-fw"></i> @ViewData["notificacion"]
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
+                                    if (noti != null)
+                                    {
+                                       <div>
+                                            <i class="fa fa-comment fa-fw"></i> @ViewData["notificacion"]
+                                            <span class="pull-right text-muted small">4 minutes ago</span>
+                                       </div>
+                                    }
+                                    else
+                                    {
+                                       <div>
+                                           <i class="fa fa-comment fa-fw"></i> 
+                                           <span class="pull-right text-muted small">4 minutes ago</span>
+                                       </div>
+                                    }
                                 }
                                 else
                                 {
@@ -90,7 +113,7 @@
                                         <i class="fa fa-comment fa-fw"></i> New Notification
                                         <span class="pull-right text-muted small">4 minutes ago</span>
                                     </div>
-                                }   
+                                }
                             </a>
                         </li>
                         <!--li class="divider"></!--li>
@@ -219,7 +242,7 @@
                                 <a asp-controller="Personal" asp-action="Listado"><i class="fa fa-users fa-fw"></i> Personal<span class="fa arrow"></span></a>
                             </li>
                             <li>
-                                <a href="index.html"><i class="fa fa-paint-brush fa-fw"></i> Enmaquetado</a>
+                                <a asp-action="Volumenes" asp-controller="Volumenes"><i class="fa fa-paint-brush fa-fw"></i> Enmaquetado</a>
                             </li>
                         }
 
@@ -238,7 +261,7 @@
                         @if (t != 1)
                         {
                             <li>
-                                <a href="contacto.html"><i class="fa fa-file-text fa-fw"></i> Publicaciones</a>
+                                <a asp-action="Volumenes" asp-controller="Volumenes"><i class="fa fa-file-text fa-fw"></i> Publicaciones</a>
                             </li>
                         }
                         <!-- /input-group -->
@@ -615,7 +638,7 @@
                             data: {
                                 "nombre": nombre,
                                 "apellido": apellidos,
-                                "email" : correo
+                                "email": correo
                             }, success: function (result) {
                                 //alert("result");
                                 var ul = document.getElementById('ul');
@@ -632,9 +655,9 @@
                                 li.appendChild(document.createTextNode(texto));
                                 ul.appendChild(li);
                             }, error: function (response) {
-                                alert(nombre + "" + apellidos+""+correo);
+                                alert(nombre + "" + apellidos + "" + correo);
                             }
-                            
+
                         });
                     }
                 });

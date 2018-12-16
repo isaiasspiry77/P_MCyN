@@ -92,7 +92,7 @@
     </div>
 
     <p>
-        <a asp-action="Index" asp-controller="Home"><button type="button" class="btn btn-default">Volver al inicio</button></a>
+        <a asp-action="Listado" asp-controller="Articulos"><button type="button" class="btn btn-default">Volver al Listado</button></a>
     </p>
     <script>
         function ObtenId(elemento) {
@@ -109,7 +109,6 @@
                 success: function (result) {
                     elemento.style.display = 'none';
                     swal({
-                        position: 'top-end',
                         type: 'success',
                         title: 'Asignación Exitosa',
                         showConfirmButton: false,

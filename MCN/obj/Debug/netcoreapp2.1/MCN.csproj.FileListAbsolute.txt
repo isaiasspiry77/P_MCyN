@@ -187,3 +187,5 @@ C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\View
 C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\DetalleArticuloAutor.g.cshtml.cs
 C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\UserSecretsAssemblyInfo.cs
 C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\DetalleArticuloRevisor.g.cshtml.cs
+C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\Revisar.g.cshtml.cs
+C:\Users\isaias spiry\source\repos\P_MCyN\MCN\obj\Debug\netcoreapp2.1\Razor\Views\Articulos\Intermedio.g.cshtml.cs
